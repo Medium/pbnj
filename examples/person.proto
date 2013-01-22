@@ -2,9 +2,9 @@
  * Proto definition for a Person
  */
 
-package tutorial;
+package examples;
 
-import "examples/helper.proto";
+import "examples/common.proto";
 
 option java_package = "com.example.tutorial";
 option java_outer_classname = "AddressBookProtos";
@@ -13,6 +13,8 @@ message Person {
   required string name = 1;
   required int32 id = 2;        // Unique ID number for this person.
   optional string email = 3;
+  repeated PhoneNumber phone = 4;
+  repeated Pair customFields = 5;
 
   enum PhoneType {
     MOBILE = 0;
@@ -23,10 +25,8 @@ message Person {
   message PhoneNumber {
     required string number = 1;
     optional PhoneType type = 2 [default = HOME];
-    optional string country = 3 [default = "US"];
+    optional string countryCode = 3 [default = "+1"];
   }
-
-  repeated PhoneNumber phone = 4;
 }
 
 // Our address book file is just one of these.

@@ -1,0 +1,6 @@
+
+// Untyped data object for storing key/value pairs.
+message Pair {
+  required string key = 1;
+  required string value = 2;
+}
