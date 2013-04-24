@@ -1,0 +1,29 @@
+{
+  "name": "pbnj",
+  "version": "0.0.1",
+  "keywords": ["protocol", "buffer", "proto", "protobuf", "parser"],
+  "description": "JavaScript proto descriptor parser and code generator",
+  "homepage": "https://github.com/dpup/pbnj",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/dpup/pbnj.git"
+  },
+  "licenses": [ {
+    "type": "Apache 2.0",
+    "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+  } ],
+  "author": {
+    "name": "Dan Pupius",
+    "email": "dan@medium.com",
+    "url": "http://pupius.co.uk"
+  },
+  "maintainers": [ {
+    "name": "Dan Pupius",
+    "email": "dan@medium.com",
+    "web": "http://pupius.co.uk/"
+  } ],
+  "main": "lib/pbnj.js",
+  "dependencies": {
+    "soynode": "~0.2.1"
+  }
+}
