@@ -14,16 +14,18 @@
   } ],
   "author": {
     "name": "Dan Pupius",
-    "email": "dan@medium.com",
+    "email": "dan@pupi.us",
     "url": "http://pupius.co.uk"
   },
   "maintainers": [ {
     "name": "Dan Pupius",
-    "email": "dan@medium.com",
+    "email": "dan@pupi.us",
     "web": "http://pupius.co.uk/"
   } ],
   "main": "lib/pbnj.js",
   "dependencies": {
+    "mkdirp": "0.3.5",
+    "kew": "0.1.2",
     "soynode": "~0.2.1"
   }
 }

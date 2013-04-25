@@ -5,6 +5,7 @@ option db_table = "USER_ACTIVITY";
 
 message UserActivity {
   option hash_key = "user_id";
+  option range_key = "ACTIVITY_ITEM";
 
   required string user_id = 1;
   required int64 occured_at = 2 [js_type="Date"];
@@ -19,19 +20,21 @@ message UserActivity {
 
 message RecommendRollup {
   option hash_key = "user_id";
+  option range_key = "ACTIVITY_ROLLUP_FOR_RECOMMENDS";
 
   required string user_id = 1;
   required string post_id = 2;
   required int64 first_occurred_at = 3 [js_type="Date"];
   required int64 last_occurred_at = 4 [js_type="Date"];
-  required int32 count = 5;
+  required int32 count = 5 [default="-1"];
   required bool is_latest = 6;
 }
 
 message ActivityIndex {
   option hash_key = "user_id";
+  option range_key = "ACTIVITY_INDEX";
 
   required string user_id = 1;
   required int64 occurred_at = 2 [js_type="Date"];
-  required string metadata = 3 [js_type="Json"];
+  required string metadata = 3 [js_type="Object"];
 }
