@@ -1,0 +1,14 @@
+// Proto definition for a Car
+
+import "common.proto";
+import "person.proto";
+
+package examples;
+
+message Vehicle {
+  required string make = 1;
+  required string model = 2;
+  required Color color = 3;
+  optional Person driver = 4;
+  repeated Person passenger = 5;
+}

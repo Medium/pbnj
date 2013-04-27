@@ -1,0 +1,13 @@
+
+package examples;
+
+message StringPair {
+  required string key = 1;
+  required string value = 2;
+}
+
+message Color {
+  required int32 red = 1;
+  required int32 green = 2;
+  required int32 blue = 3;
+}

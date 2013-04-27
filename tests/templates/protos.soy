@@ -1,0 +1,12 @@
+{namespace protoTemplate autoescape="contextual"}
+
+/**
+ * @param name
+ * @param messages
+ */
+{template .justNames}
+  Proto={$name},
+  {foreach $message in $messages}
+    Msg={$message.name},
+  {/foreach}
+{/template}
