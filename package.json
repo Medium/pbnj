@@ -1,6 +1,6 @@
 {
   "name": "pbnj",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "keywords": ["protocol", "buffer", "proto", "protobuf", "parser"],
   "description": "JavaScript proto descriptor parser and code generator",
   "homepage": "https://github.com/dpup/pbnj",
