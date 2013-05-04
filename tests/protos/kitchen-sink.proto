@@ -1,0 +1,44 @@
+// Proto file that tries to exercise all valid proto features.
+
+/**
+ * Both comment types should be supported and ignore other tokens such as message FooBar { }.
+ */
+
+package some_package;
+
+import "some-other-file.proto";
+
+option file_level_option = "string value";
+option another_option = "Just \"testing\" that strings parse.";
+
+
+message ThisIsTheKitchenSink {
+  required string required_field = 1;
+  optional int32 optional_field = 2;
+  repeated bool repeated_field = 3;
+  // Skip 4, just as a test.
+  optional AnotherMessage using_another_message = 5;
+}
+
+
+message AnotherMessage {
+  option message_level_option = "XYZ";
+  required int64 id = 1000 [option=1, something_else="foobar"];
+  optional string x = 1; optional string y = 2; optional string z = 3;
+
+  message MessagesWithinMessages {
+    required bool done = 1;
+
+    enum EnumInsideMessageInsideMessage {
+      YES = 1;
+      NO = 2;
+    }
+  }
+}
+
+
+enum FooBar {
+  FIRST = 1;
+  SECOND = 2;
+  THIRD = 3;
+}
