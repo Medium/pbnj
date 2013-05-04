@@ -1,8 +1,8 @@
 {
   "name": "pbnj",
   "version": "0.0.5",
-  "keywords": ["protocol", "buffer", "proto", "protobuf", "parser"],
-  "description": "JavaScript proto descriptor parser and code generator",
+  "keywords": ["protocol", "buffer", "proto", "protobuf", "parser", "codegen"],
+  "description": "JavaScript protocol buffer schema parser and template based code generator",
   "homepage": "https://github.com/dpup/pbnj",
   "repository": {
     "type": "git",

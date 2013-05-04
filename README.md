@@ -1,8 +1,10 @@
 pbnj
 ====
 
-This is a work in progress.  It is early days.
+_JavaScript protocol buffer schema parser and template based code generator_
 
+This project is functional and being used in real projects.  But is in its early
+days and likely to be in a state of flux for some time.
 
 Author
 ------
