@@ -15,8 +15,5 @@ Author
 License
 -------
 
-Copyright 2012 [Daniel Pupius](http://pupius.co.uk/).
-
-Licensed under the Apache License, Version 2.0.
-See the top-level file `LICENSE.txt` and
-http://www.apache.org/licenses/LICENSE-2.0
+Copyright 2013 [Daniel Pupius](http://pupius.co.uk/).
+[Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0).
