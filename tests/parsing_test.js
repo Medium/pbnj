@@ -12,11 +12,47 @@ var path = require('path')
 // verify parse failures for
 // - bad types.
 // - enum values are in int32 range.
-// - 
 
 
 exports.testKitchenSinkParsing = function (test) {
-  var descriptor = parseFile('kitchen-sink.proto')
+  var proto = parseFile('kitchen-sink.proto')
+
+  test.equal(proto.getPackage(), 'some_package')
+
+  // Test imports.
+  test.equal(proto.getImports().length, 1)
+  test.equal(proto.getImports()[0], path.join(process.cwd(), 'some-other-file.proto'))
+
+  // Test proto level options.
+  test.equal(proto.getOptionKeys().length, 2)
+  test.equal(proto.getOption('file_level_option'), 'string value')
+  test.equal(proto.getOption('another_option'), 'Just "testing" that strings parse.')
+
+  // Test message level options.
+  test.equals(proto.getMessage('AnotherMessage').getOption('message_level_option'), 'XYZ')
+
+  // Test messages.
+  test.equal(proto.getMessages().length, 2)
+  test.ok(!!proto.getMessage('AnotherMessage').getMessage('MessagesWithinMessages'))
+  test.ok(!!proto.getMessage('AnotherMessage')
+      .getMessage('MessagesWithinMessages')
+      .getEnum('EnumInsideMessageInsideMessage'))
+
+  // Test fields.
+  var msg = proto.getMessage('ThisIsTheKitchenSink')
+  test.equal(msg.getFields().length, 4)
+  test.ok(msg.getField('optional_field').isOptional())
+  test.ok(!msg.getField('required_field').isOptional())
+  test.ok(!msg.getField('required_field').isRepeated())
+  test.ok(!msg.getField('optional_field').isRepeated())
+  test.ok(!msg.getField('repeated_field').isOptional())
+  test.ok(msg.getField('repeated_field').isRepeated())
+
+  test.equal(msg.getField('required_field').getType(), 'string')
+  test.equal(msg.getField('optional_field').getType(), 'number')
+  test.equal(msg.getField('repeated_field').getType(), 'boolean')
+  test.equal(msg.getField('using_another_message').getType(), 'AnotherMessage')
+
   test.done()
 }
 
