@@ -20,8 +20,8 @@ exports.testKitchenSinkParsing = function (test) {
   test.equal(proto.getPackage(), 'some_package')
 
   // Test imports.
-  test.equal(proto.getImports().length, 1)
-  test.equal(proto.getImports()[0], path.join(process.cwd(), 'some-other-file.proto'))
+  test.equal(proto.getImportNames().length, 1)
+  test.equal(proto.getImportNames()[0], path.join(process.cwd(), 'some-other-file.proto'))
 
   // Test proto level options.
   test.equal(proto.getOptionKeys().length, 2)
