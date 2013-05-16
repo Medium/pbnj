@@ -22,6 +22,7 @@ exports.testGetProtos = function (test) {
 
   // Make sure getImports() returns an array of proto descriptors.
   test.equals(personProtos[0].getImports()[0], personProtos[1])
+  test.equals(1, personProtos[0].toTemplateObject().imports.length)
 
   test.done()
 }
