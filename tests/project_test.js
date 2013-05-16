@@ -16,8 +16,12 @@ exports.testGetProtos = function (test) {
   var allProtos = project.getProtos().map(getProtoName)
   test.deepEqual(['vehicle.proto', 'common.proto', 'person.proto'], allProtos)
 
-  var personImports = project.getProtos('protos/person.proto').map(getProtoName)
+  var personProtos = project.getProtos('protos/person.proto')
+  var personImports = personProtos.map(getProtoName)
   test.deepEqual(['person.proto', 'common.proto'], personImports)
+
+  // Make sure getImports() returns an array of proto descriptors.
+  test.equals(personProtos[0].getImports()[0], personProtos[1])
 
   test.done()
 }
@@ -57,14 +61,14 @@ exports.testBasicCompilation = function (test) {
 
 
 exports.testDefaultOutputFnWritesFile = function (test) {
-  var expectedFile = path.join(__dirname, 'testgen', 'common.proto.js')
+  var expectedFile = path.join(__dirname, 'generated-stuff2', 'common.proto.js')
 
   // Make sure the expected file doesn't exist yet.
   if (fs.existsSync(expectedFile)) fs.unlinkSync(expectedFile)
 
   new Project(__dirname)
     .addJob('protos/common.proto', 'protoTemplate.justNames')
-    .setOutDir('testgen')
+    .setOutDir('generated-stuff2')
     .compile()
     .then(function () {
       test.ok(fs.existsSync(expectedFile), 'Expected output missing')
