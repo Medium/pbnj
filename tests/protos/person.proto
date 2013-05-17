@@ -6,15 +6,19 @@ import "common.proto";
 
 package examples;
 
+// Comment
 message Person {
   required string name = 1;
+  // Comment
   required int32 id = 2;
   optional string email = 3;
   repeated PhoneNumber phone = 4;
   repeated StringPair customFields = 5;
 
+  // Comment
   enum PhoneType {
     MOBILE = 0;
+    // Comment
     HOME = 1;
     WORK = 2;
   }
