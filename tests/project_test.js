@@ -24,6 +24,14 @@ exports.testGetProtos = function (test) {
   test.equals(personProtos[0].getImports()[0], personProtos[1])
   test.equals(1, personProtos[0].toTemplateObject().imports.length)
 
+  var enums = personProtos[0].toTemplateObject().messages[0].enums
+  test.equal(1, enums && enums.length)
+  test.deepEqual(
+    {name: 'PhoneType', values: [{name: 'MOBILE', number: 0},
+                                 {name: 'HOME', number: 1},
+                                 {name: 'WORK', number: 2}]},
+    enums[0])
+
   test.done()
 }
 
