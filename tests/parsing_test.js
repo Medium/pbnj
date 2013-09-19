@@ -70,6 +70,18 @@ exports.testBadProto_duplicateTagNames = function (test) {
       'Protos with duplicate tag names should throw parse errors', test)
 }
 
+exports.testBadProto_badTypeNumber = function (test) {
+  assertFails('message BadType { required number first = 1; }',
+      'invalid type',
+      '"number" is not a valid type', test)
+}
+
+exports.testBadProto_badTypeBoolean = function (test) {
+  assertFails('message BadType { required boolean first = 1; }',
+      'invalid type',
+      '"boolean" is not a valid type', test)
+}
+
 
 function assertFails(protoString, expectedError, message, test) {
   try {
