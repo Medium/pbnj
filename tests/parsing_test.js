@@ -40,7 +40,7 @@ exports.testKitchenSinkParsing = function (test) {
 
   // Test fields.
   var msg = proto.getMessage('ThisIsTheKitchenSink')
-  test.equal(msg.getFields().length, 4)
+  test.equal(msg.getFields().length, 6)
   test.ok(msg.getField('optional_field').isOptional())
   test.ok(!msg.getField('required_field').isOptional())
   test.ok(!msg.getField('required_field').isRepeated())
@@ -52,6 +52,8 @@ exports.testKitchenSinkParsing = function (test) {
   test.equal(msg.getField('optional_field').getType(), 'number')
   test.equal(msg.getField('repeated_field').getType(), 'boolean')
   test.equal(msg.getField('using_another_message').getType(), 'AnotherMessage')
+  test.equal(-1, msg.getField('negative_field').getOption('default'))
+  test.equal('string', msg.getField('string_field').getOption('default'))
 
   test.done()
 }
@@ -80,6 +82,22 @@ exports.testBadProto_badTypeBoolean = function (test) {
   assertFails('message BadType { required boolean first = 1; }',
       'invalid type',
       '"boolean" is not a valid type', test)
+}
+
+
+exports.testBadProto_badTag = function (test) {
+  assertFails('message BadTag { required string first = 1-1; }',
+      'Malformed number 1-1',
+      'Malformed number 1-1',
+      test)
+}
+
+
+exports.testBadProto_unexpectedChars = function (test) {
+  assertFails('message BadTag { required string first = $1; }',
+      'Unexpected characters in "test.proto" at line: 1, column: 42, char: $',
+      'Bad characters',
+      test)
 }
 
 
