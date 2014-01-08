@@ -18,6 +18,9 @@ message ThisIsTheKitchenSink {
   repeated bool repeated_field = 3;
   // Skip 4, just as a test.
   optional AnotherMessage using_another_message = 5;
+
+  optional int32 negative_field = 6 [default=-1];
+  optional string string_field = 7 [default='string'];
 }
 
 
