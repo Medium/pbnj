@@ -1,6 +1,6 @@
 {
   "name": "pbnj",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "keywords": ["protocol", "buffer", "proto", "protobuf", "parser", "codegen"],
   "description": "JavaScript protocol buffer schema parser and template based code generator",
   "homepage": "https://github.com/dpup/pbnj",
@@ -29,7 +29,7 @@
   "dependencies": {
     "mkdirp": "0.3.5",
     "nodeunit": "0.8.0",
-    "kew": "0.3.3",
-    "soynode": "0.3.0"
+    "kew": "0.4.0",
+    "soynode": "0.3.5"
   }
 }
