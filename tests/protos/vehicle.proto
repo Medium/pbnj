@@ -1,7 +1,7 @@
 // Proto definition for a Car
 
-import "common.proto";
-import "person.proto";
+import "tests/protos/common.proto";
+import "tests/protos/person.proto";
 
 package examples;
 

@@ -24,7 +24,7 @@
   } ],
   "main": "lib/pbnj.js",
   "scripts": {
-    "test": "nodeunit ./tests/"
+    "test": "nodeunit ./tests/ && tests/protoc_test.sh"
   },
   "dependencies": {
     "mkdirp": "0.3.5",
