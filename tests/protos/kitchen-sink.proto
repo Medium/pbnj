@@ -6,10 +6,10 @@
 
 package some_package;
 
-import "some-other-file.proto";
+import "tests/protos/options.proto";
 
-option file_level_option = "string value";
-option another_option = "Just \"testing\" that strings parse.";
+option (file_level_option) = "string value";
+option (another_option) = "Just \"testing\" that strings parse.";
 
 
 message ThisIsTheKitchenSink {
@@ -25,8 +25,8 @@ message ThisIsTheKitchenSink {
 
 
 message AnotherMessage {
-  option message_level_option = "XYZ";
-  required int64 id = 1000 [option=1, something_else="foobar"];
+  option (message_level_option) = "XYZ";
+  required int64 id = 1000 [(option)=1, (something_else)="foobar"];
   optional string x = 1; optional string y = 2; optional string z = 3;
 
   message MessagesWithinMessages {
