@@ -20,7 +20,7 @@ exports.testKitchenSinkParsing = function (test) {
   test.equal(proto.getPackage(), 'some_package')
 
   // Test imports.
-  test.equal(proto.getImportNames().length, 1)
+  test.equal(proto.getImportNames().length, 2)
   test.equal(proto.getImportNames()[0], path.join(process.cwd(), 'tests/protos/options.proto'))
 
   // Test proto level options.
@@ -98,6 +98,13 @@ exports.testBadProto_unexpectedChars = function (test) {
       'Unexpected characters in "test.proto" at line: 1, column: 42, char: $',
       'Bad characters',
       test)
+}
+
+
+exports.testExtendConsumed = function (test) {
+  var proto = parseFile('options.proto')
+  // TODO : Verify descriptor is extended
+  test.done()
 }
 
 
