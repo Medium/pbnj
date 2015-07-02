@@ -21,7 +21,7 @@ exports.testKitchenSinkParsing = function (test) {
 
   // Test imports.
   test.equal(proto.getImportNames().length, 2)
-  test.equal(proto.getImportNames()[0], path.join(process.cwd(), 'tests/protos/options.proto'))
+  test.equal(proto.getImportNames()[0], 'protos/options.proto')
 
   // Test proto level options.
   test.equal(proto.getOptionKeys().length, 2)
