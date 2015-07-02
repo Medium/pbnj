@@ -8,10 +8,11 @@ var fs = require('fs')
 var path = require('path')
 var Project = require('../lib/Project')
 
+var baseDir = __dirname
 
 exports.testGetProtos = function (test) {
-  var project = new Project(__dirname)
-    .addProto('protos/vehicle.proto', true)
+  var project = new Project(baseDir)
+    .addProto('protos/vehicle.proto')
 
   var allProtos = project.getProtos().map(getProtoName)
   test.deepEqual(['vehicle.proto', 'common.proto', 'person.proto'], allProtos)
@@ -38,7 +39,7 @@ exports.testGetProtos = function (test) {
 
 exports.testBasicCompilation = function (test) {
   var compilations = []
-  new Project(__dirname)
+  new Project(baseDir)
     .addJob('protos/vehicle.proto', 'protoTemplate.justNames', '.xx.js')
     .setOutDir('generated-stuff')
     .setOutputFn(function (descriptor, fileName, contents) {
@@ -75,7 +76,7 @@ exports.testDefaultOutputFnWritesFile = function (test) {
   // Make sure the expected file doesn't exist yet.
   if (fs.existsSync(expectedFile)) fs.unlinkSync(expectedFile)
 
-  new Project(__dirname)
+  new Project(baseDir)
     .addJob('protos/common.proto', 'protoTemplate.justNames')
     .setOutDir('generated-stuff2')
     .compile()
@@ -87,6 +88,23 @@ exports.testDefaultOutputFnWritesFile = function (test) {
     .fail(function (err) {
       console.log(err.stack)
     })
+}
+
+exports.testKitchenSinkProto = function (test) {
+  var project = new Project(baseDir)
+      .addProto('protos/kitchen-sink.proto')
+
+  var allProtos = project.getProtos().map(getProtoName)
+  test.deepEqual(['kitchen-sink.proto', 'options.proto', 'descriptor.proto'], allProtos)
+
+  project.setOutDir('generated-stuff3')
+      .compile()
+      .then(function () {
+        test.done()
+      }, function (err) {
+        test.ifError(err)
+        test.done()
+      })
 }
 
 

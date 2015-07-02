@@ -2,7 +2,7 @@
  * Proto definition for a Person
  */
 
-import "tests/protos/common.proto";
+import "protos/common.proto";
 
 package examples;
 

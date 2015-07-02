@@ -6,7 +6,7 @@
 
 package some_package;
 
-import "tests/protos/options.proto";
+import "protos/options.proto";
 import "google/protobuf/descriptor.proto";
 
 option (file_level_option) = "string value";
