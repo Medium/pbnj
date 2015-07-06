@@ -5,6 +5,8 @@ import "protos/person.proto";
 
 package examples;
 
+option java_outer_classname = "VehicleProtos";
+
 message Vehicle {
   required string make = 1;
   required string model = 2;
