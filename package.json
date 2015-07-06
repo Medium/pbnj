@@ -28,8 +28,10 @@
   },
   "dependencies": {
     "mkdirp": "0.3.5",
-    "nodeunit": "0.8.2",
     "kew": "0.4.0",
     "soynode": "0.3.5"
+  },
+  "devDependencies": {
+    "nodeunit": "0.8.2"
   }
 }
