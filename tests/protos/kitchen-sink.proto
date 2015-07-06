@@ -7,6 +7,7 @@
 package some_package;
 
 import "protos/options.proto";
+import "protos/common.proto";
 import "google/protobuf/descriptor.proto";
 
 option (file_level_option) = "string value";
@@ -22,6 +23,7 @@ message ThisIsTheKitchenSink {
 
   optional int32 negative_field = 6 [default=-1];
   optional string string_field = 7 [default='string'];
+  optional examples.Color color_field = 8;
 }
 
 
