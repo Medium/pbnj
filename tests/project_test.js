@@ -65,7 +65,46 @@ exports.testBasicCompilation = function (test) {
       test.done()
     })
     .fail(function (err) {
-      console.log(err.stack)
+      test.ifError(err)
+      test.done()
+    })
+}
+
+exports.testSuffixSpecificOutputDir = function (test) {
+  var compilations = []
+  new Project(baseDir)
+    .addJob('protos/vehicle.proto', 'protoTemplate.justNames', '.java')
+    .addJob('protos/vehicle.proto', 'protoTemplate.justNames', '.xx.js')
+    .setOutDir('generated-stuff')
+    .setOutDir('java/generated-stuff', '.java')
+    .setOutputFn(function (descriptor, fileName, contents) {
+      compilations.push({
+        descriptor: descriptor,
+        fileName: fileName,
+        contents: contents
+      })
+      return kew.resolve(contents)
+    })
+    .compile()
+    .then(function () {
+      test.equals(6, compilations.length, 'Six protos should have been compiled')
+
+      test.equals('Proto=vehicle.proto,Msg=Vehicle,', compilations[0].contents)
+      test.equals('Proto=common.proto,Msg=StringPair,Msg=Color,', compilations[1].contents)
+      test.equals('Proto=person.proto,Msg=Person,', compilations[2].contents)
+
+      test.equals(path.join(__dirname, 'java/generated-stuff', 'VehicleProtos.java'), compilations[0].fileName)
+      test.equals(path.join(__dirname, 'java/generated-stuff', 'common.proto.java'), compilations[1].fileName)
+      test.equals(path.join(__dirname, 'java/generated-stuff', 'person.proto.java'), compilations[2].fileName)
+      test.equals(path.join(__dirname, 'generated-stuff', 'vehicle.proto.xx.js'), compilations[3].fileName)
+      test.equals(path.join(__dirname, 'generated-stuff', 'common.proto.xx.js'), compilations[4].fileName)
+      test.equals(path.join(__dirname, 'generated-stuff', 'person.proto.xx.js'), compilations[5].fileName)
+
+      test.done()
+    })
+    .fail(function (err) {
+      test.ifError(err)
+      test.done()
     })
 }
 
@@ -86,7 +125,8 @@ exports.testDefaultOutputFnWritesFile = function (test) {
       test.done()
     })
     .fail(function (err) {
-      console.log(err.stack)
+      test.ifError(err)
+      test.done()
     })
 }
 
