@@ -20,7 +20,7 @@ exports.testKitchenSinkParsing = function (test) {
   test.equal(proto.getPackage(), 'some_package')
 
   // Test imports.
-  test.equal(proto.getImportNames().length, 2)
+  test.equal(proto.getImportNames().length, 3)
   test.equal(proto.getImportNames()[0], 'protos/options.proto')
 
   // Test proto level options.
@@ -40,7 +40,7 @@ exports.testKitchenSinkParsing = function (test) {
 
   // Test fields.
   var msg = proto.getMessage('ThisIsTheKitchenSink')
-  test.equal(msg.getFields().length, 6)
+  test.equal(msg.getFields().length, 7)
   test.ok(msg.getField('optional_field').isOptional())
   test.ok(!msg.getField('required_field').isOptional())
   test.ok(!msg.getField('required_field').isRepeated())
@@ -52,6 +52,8 @@ exports.testKitchenSinkParsing = function (test) {
   test.equal(msg.getField('optional_field').getType(), 'number')
   test.equal(msg.getField('repeated_field').getType(), 'boolean')
   test.equal(msg.getField('using_another_message').getType(), 'AnotherMessage')
+  test.equal(msg.getField('color_field').getType(), 'examples.Color')
+  test.equal(msg.getField('color_field').getBaseType(), 'Color')
   test.equal(-1, msg.getField('negative_field').getOption('default'))
   test.equal('string', msg.getField('string_field').getOption('default'))
 

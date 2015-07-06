@@ -95,7 +95,7 @@ exports.testKitchenSinkProto = function (test) {
       .addProto('protos/kitchen-sink.proto')
 
   var allProtos = project.getProtos().map(getProtoName)
-  test.deepEqual(['kitchen-sink.proto', 'options.proto', 'descriptor.proto'], allProtos)
+  test.deepEqual(['kitchen-sink.proto', 'options.proto', 'descriptor.proto', 'common.proto'], allProtos)
 
   project.setOutDir('generated-stuff3')
       .compile()
