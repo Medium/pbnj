@@ -13,16 +13,18 @@ var baseDir = __dirname
 exports.testGetProtos = function (test) {
   var project = new Project(baseDir)
     .addProto('protos/vehicle.proto')
+    .addProto('protos/common.proto')
 
+  // getProtos() with no params should return all protos (including imports)
   var allProtos = project.getProtos().map(getProtoName)
   test.deepEqual(['vehicle.proto', 'common.proto', 'person.proto'], allProtos)
 
+  // getProtos() with proto param should return only that proto
   var personProtos = project.getProtos('protos/person.proto')
   var personImports = personProtos.map(getProtoName)
-  test.deepEqual(['person.proto', 'common.proto'], personImports)
+  test.deepEqual(['person.proto'], personImports)
 
-  // Make sure getImports() returns an array of proto descriptors.
-  test.equals(personProtos[0].getImports()[0], personProtos[1])
+  // Make sure imports are processed and returned to template
   test.equals(1, personProtos[0].toTemplateObject().imports.length)
 
   var enums = personProtos[0].toTemplateObject().messages[0].enums
@@ -52,15 +54,11 @@ exports.testBasicCompilation = function (test) {
     })
     .compile()
     .then(function () {
-      test.equals(3, compilations.length, 'Three protos should have been compiled')
+      test.equals(1, compilations.length, 'One proto should have been compiled')
 
       test.equals('Proto=vehicle.proto,Msg=Vehicle,', compilations[0].contents)
-      test.equals('Proto=common.proto,Msg=StringPair,Msg=Color,', compilations[1].contents)
-      test.equals('Proto=person.proto,Msg=Person,', compilations[2].contents)
 
       test.equals(path.join(__dirname, 'generated-stuff', 'vehicle.proto.xx.js'), compilations[0].fileName)
-      test.equals(path.join(__dirname, 'generated-stuff', 'common.proto.xx.js'), compilations[1].fileName)
-      test.equals(path.join(__dirname, 'generated-stuff', 'person.proto.xx.js'), compilations[2].fileName)
 
       test.done()
     })
@@ -87,18 +85,13 @@ exports.testSuffixSpecificOutputDir = function (test) {
     })
     .compile()
     .then(function () {
-      test.equals(6, compilations.length, 'Six protos should have been compiled')
+      test.equals(2, compilations.length, 'Two protos should have been compiled')
 
       test.equals('Proto=vehicle.proto,Msg=Vehicle,', compilations[0].contents)
-      test.equals('Proto=common.proto,Msg=StringPair,Msg=Color,', compilations[1].contents)
-      test.equals('Proto=person.proto,Msg=Person,', compilations[2].contents)
+      test.equals('Proto=vehicle.proto,Msg=Vehicle,', compilations[1].contents)
 
       test.equals(path.join(__dirname, 'java/generated-stuff', 'VehicleProtos.java'), compilations[0].fileName)
-      test.equals(path.join(__dirname, 'java/generated-stuff', 'common.proto.java'), compilations[1].fileName)
-      test.equals(path.join(__dirname, 'java/generated-stuff', 'person.proto.java'), compilations[2].fileName)
-      test.equals(path.join(__dirname, 'generated-stuff', 'vehicle.proto.xx.js'), compilations[3].fileName)
-      test.equals(path.join(__dirname, 'generated-stuff', 'common.proto.xx.js'), compilations[4].fileName)
-      test.equals(path.join(__dirname, 'generated-stuff', 'person.proto.xx.js'), compilations[5].fileName)
+      test.equals(path.join(__dirname, 'generated-stuff', 'vehicle.proto.xx.js'), compilations[1].fileName)
 
       test.done()
     })
