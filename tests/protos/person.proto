@@ -21,6 +21,7 @@ message Person {
     // Comment
     HOME = 1;
     WORK = 2;
+    WORK_FAX = 3;
   }
 
   message PhoneNumber {
