@@ -30,9 +30,10 @@ exports.testGetProtos = function (test) {
   var enums = personProtos[0].toTemplateObject().messages[0].enums
   test.equal(1, enums && enums.length)
   test.deepEqual(
-    {name: 'PhoneType', values: [{name: 'MOBILE', number: 0},
-                                 {name: 'HOME', number: 1},
-                                 {name: 'WORK', number: 2}]},
+    {name: 'PhoneType', values: [{name: 'MOBILE', titleName: 'Mobile', number: 0},
+                                 {name: 'HOME', titleName: 'Home', number: 1},
+                                 {name: 'WORK', titleName: 'Work', number: 2},
+                                 {name: 'WORK_FAX', titleName: 'WorkFax', number: 3}]},
     enums[0])
 
   test.done()
