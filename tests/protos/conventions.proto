@@ -1,0 +1,16 @@
+
+package conventions;
+
+message Casing {
+  optional string normal_case = 1;
+  optional string normal_case_ios = 2;
+  optional string camelCase = 3;
+  optional string camelCaseIOS = 4;
+  optional string TitleCase = 5;
+  optional string TitleCaseIOS = 6;
+  optional string Weird_Case = 7;
+}
+
+enum CasingEnum {
+  TWO_WORDS = 1;
+}
