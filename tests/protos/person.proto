@@ -29,4 +29,6 @@ message Person {
     optional PhoneType type = 2 [default = HOME];
     optional string countryCode = 3 [default = "+1"];
   }
+
+  extensions 100 to 199;
 }

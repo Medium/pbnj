@@ -1,0 +1,11 @@
+/**
+ * Extension of person
+ */
+
+import "protos/person.proto";
+
+package examples;
+
+extend Person {
+  optional int32 flying_speed = 101;
+}
