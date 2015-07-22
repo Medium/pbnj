@@ -1,6 +1,8 @@
 pbnj
 ====
 
+[![Build Status](https://travis-ci.org/Medium/pbnj.svg?branch=master)](https://travis-ci.org/Medium/pbnj)
+
 _JavaScript protocol buffer schema parser and template based code generator_
 
 This project is functional and being used in real projects.  But is in its early
