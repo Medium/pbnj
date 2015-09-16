@@ -15,6 +15,9 @@ exports.testCasingMessage = function (test) {
 
   var msg = proto.getMessage('Casing')
 
+  test.equal('Casing', msg.getName())
+  test.equal('casing', msg.getCamelName())
+
   test.ok(msg.getField('normal_case'))
   test.equal('normal_case', msg.getField('normal_case').toTemplateObject().name)
   test.equal('NormalCase', msg.getField('normal_case').toTemplateObject().titleName)
