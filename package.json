@@ -8,10 +8,7 @@
     "type": "git",
     "url": "git://github.com/dpup/pbnj.git"
   },
-  "licenses": [ {
-    "type": "Apache 2.0",
-    "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
-  } ],
+  "license": "Apache-2.0",
   "author": {
     "name": "Dan Pupius",
     "email": "dan@pupi.us",
@@ -24,7 +21,7 @@
   } ],
   "main": "lib/pbnj.js",
   "scripts": {
-    "test": "nodeunit ./tests/ && tests/protoc_test.sh"
+    "test": "nodeunit ./tests/ && tests/protoc_test.sh && eslint lib"
   },
   "dependencies": {
     "mkdirp": "0.3.5",
@@ -32,6 +29,7 @@
     "soynode": "0.3.5"
   },
   "devDependencies": {
+    "eslint": "1.5.1",
     "nodeunit": "0.8.2"
   }
 }
