@@ -7,10 +7,11 @@ var kew = require('kew')
 var fs = require('fs')
 var path = require('path')
 var Project = require('../lib/Project')
+var builder = new (require('nodeunitq')).Builder(module.exports)
 
 var baseDir = __dirname
 
-exports.testGetProtos = function (test) {
+builder.add(function testGetProtos(test) {
   var project = new Project(baseDir)
     .addProto('protos/vehicle.proto')
     .addProto('protos/common.proto')
@@ -37,12 +38,12 @@ exports.testGetProtos = function (test) {
     enums[0])
 
   test.done()
-}
+})
 
 
-exports.testBasicCompilation = function (test) {
+builder.add(function testBasicCompilation(test) {
   var compilations = []
-  new Project(baseDir)
+  return new Project(baseDir)
     .addJob('protos/vehicle.proto', 'protoTemplate.justNames', '.xx.js')
     .setOutDir('generated-stuff')
     .setOutputFn(function (descriptor, fileName, contents) {
@@ -60,18 +61,12 @@ exports.testBasicCompilation = function (test) {
       test.equals('Proto=vehicle.proto,Msg=Vehicle,', compilations[0].contents)
 
       test.equals(path.join(__dirname, 'generated-stuff', 'vehicle.proto.xx.js'), compilations[0].fileName)
-
-      test.done()
     })
-    .fail(function (err) {
-      test.ifError(err)
-      test.done()
-    })
-}
+})
 
-exports.testSuffixSpecificOutputDir = function (test) {
+builder.add(function testSuffixSpecificOutputDir(test) {
   var compilations = []
-  new Project(baseDir)
+  return new Project(baseDir)
     .addJob('protos/vehicle.proto', 'protoTemplate.justNames', '.java')
     .addJob('protos/vehicle.proto', 'protoTemplate.justNames', '.xx.js')
     .setOutDir('generated-stuff')
@@ -93,53 +88,35 @@ exports.testSuffixSpecificOutputDir = function (test) {
 
       test.equals(path.join(__dirname, 'java/generated-stuff', 'VehicleProtos.java'), compilations[0].fileName)
       test.equals(path.join(__dirname, 'generated-stuff', 'vehicle.proto.xx.js'), compilations[1].fileName)
-
-      test.done()
     })
-    .fail(function (err) {
-      test.ifError(err)
-      test.done()
-    })
-}
+})
 
 
-exports.testDefaultOutputFnWritesFile = function (test) {
+builder.add(function testDefaultOutputFnWritesFile(test) {
   var expectedFile = path.join(__dirname, 'generated-stuff2', 'common.proto.js')
 
   // Make sure the expected file doesn't exist yet.
   if (fs.existsSync(expectedFile)) fs.unlinkSync(expectedFile)
 
-  new Project(baseDir)
+  return new Project(baseDir)
     .addJob('protos/common.proto', 'protoTemplate.justNames')
     .setOutDir('generated-stuff2')
     .compile()
     .then(function () {
       test.ok(fs.existsSync(expectedFile), 'Expected output missing')
       fs.unlinkSync(expectedFile)
-      test.done()
     })
-    .fail(function (err) {
-      test.ifError(err)
-      test.done()
-    })
-}
+})
 
-exports.testKitchenSinkProto = function (test) {
+builder.add(function testKitchenSinkProto(test) {
   var project = new Project(baseDir)
       .addProto('protos/kitchen-sink.proto')
 
   var allProtos = project.getProtos().map(getProtoName)
   test.deepEqual(['kitchen-sink.proto', 'options.proto', 'descriptor.proto', 'common.proto'], allProtos)
 
-  project.setOutDir('generated-stuff3')
-      .compile()
-      .then(function () {
-        test.done()
-      }, function (err) {
-        test.ifError(err)
-        test.done()
-      })
-}
+  return project.setOutDir('generated-stuff3').compile()
+})
 
 
 function getProtoName(proto) {

@@ -25,11 +25,12 @@
   },
   "dependencies": {
     "mkdirp": "0.3.5",
-    "kew": "0.4.0",
+    "kew": "0.7.0",
     "soynode": "0.3.5"
   },
   "devDependencies": {
     "eslint": "1.5.1",
-    "nodeunit": "0.8.2"
+    "nodeunit": "0.8.2",
+    "nodeunitq": "0.1.1"
   }
 }
