@@ -118,6 +118,18 @@ builder.add(function testKitchenSinkProto(test) {
   return project.setOutDir('generated-stuff3').compile()
 })
 
+builder.add(function testRemoveField(test) {
+  var project = new Project(baseDir)
+      .addProto('protos/common.proto')
+
+  var color = project.getProtos('protos/common.proto')[0].getMessage('Color')
+  test.equal(3, color.toTemplateObject().fields.length)
+
+  color.removeFieldByName('red')
+  test.equal(2, color.toTemplateObject().fields.length)
+  test.done()
+})
+
 
 function getProtoName(proto) {
   return proto.getName()
