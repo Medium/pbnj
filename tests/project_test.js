@@ -34,7 +34,8 @@ builder.add(function testGetProtos(test) {
     {name: 'PhoneType', values: [{name: 'MOBILE', titleName: 'Mobile', number: 0},
                                  {name: 'HOME', titleName: 'Home', number: 1},
                                  {name: 'WORK', titleName: 'Work', number: 2},
-                                 {name: 'WORK_FAX', titleName: 'WorkFax', number: 3}]},
+                                 {name: 'WORK_FAX', titleName: 'WorkFax', number: 3}],
+     isEnum: true},
     enums[0])
 
   test.done()
@@ -127,6 +128,16 @@ builder.add(function testRemoveField(test) {
 
   color.removeFieldByName('red')
   test.equal(2, color.toTemplateObject().fields.length)
+  test.done()
+})
+
+builder.add(function testTypeResolution(test) {
+  var project = new Project(baseDir)
+      .addProto('protos/person.proto')
+
+  var person = project.getProtos('protos/person.proto')[0].getMessage('Person')
+  var customField = person.getField('customFields')
+  test.equal('StringPair', customField.toTemplateObject().typeDescriptor.name)
   test.done()
 })
 
