@@ -141,6 +141,17 @@ builder.add(function testTypeResolution(test) {
   test.done()
 })
 
+builder.add(function testTypeResolutionLoop(test) {
+  var project = new Project(baseDir)
+      .addProto('protos/loop.proto')
+
+  var dee = project.getProtos('protos/loop.proto')[0].getMessage('TweedleDee')
+  var dum = dee.getField('dum')
+  test.equal('TweedleDum', dum.toTemplateObject().typeDescriptor.name)
+  test.equal(null, dum.toTemplateObject().typeDescriptor.fields)
+  test.done()
+})
+
 
 function getProtoName(proto) {
   return proto.getName()
