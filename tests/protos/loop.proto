@@ -1,0 +1,8 @@
+
+message TweedleDee {
+  optional TweedleDum dum = 1;
+}
+
+message TweedleDum {
+  optional TweedleDee dee = 1;
+}
