@@ -35,7 +35,7 @@ builder.add(function testGetProtos(test) {
                                  {name: 'HOME', titleName: 'Home', number: 1},
                                  {name: 'WORK', titleName: 'Work', number: 2},
                                  {name: 'WORK_FAX', titleName: 'WorkFax', number: 3}],
-     isEnum: true},
+     isEnum: true, fullName: 'examples.Person.PhoneType'},
     enums[0])
 
   test.done()
@@ -124,6 +124,7 @@ builder.add(function testRemoveField(test) {
       .addProto('protos/common.proto')
 
   var color = project.getProtos('protos/common.proto')[0].getMessage('Color')
+  console.log('COLOR', color.toTemplateObject)
   test.equal(3, color.toTemplateObject().fields.length)
 
   color.removeFieldByName('red')
@@ -138,6 +139,19 @@ builder.add(function testTypeResolution(test) {
   var person = project.getProtos('protos/person.proto')[0].getMessage('Person')
   var customField = person.getField('customFields')
   test.equal('StringPair', customField.toTemplateObject().typeDescriptor.name)
+  test.done()
+})
+
+builder.add(function testTypeResolutionInner(test) {
+  var project = new Project(baseDir)
+      .addProto('protos/inner.proto')
+
+  var tortilla = project.getProtos('protos/inner.proto')[0].getMessage('Tortilla')
+  var tortillaJson = tortilla.toTemplateObject()
+  test.equal('burrito.Tortilla.Filling', tortillaJson.fields[0].typeDescriptor.fullName)
+  test.equal('burrito.Tortilla.Filling', tortillaJson.fields[1].typeDescriptor.fullName)
+  test.equal('burrito.Tortilla.Guac', tortillaJson.fields[2].typeDescriptor.fullName)
+  test.equal('burrito.Tortilla.Guac', tortillaJson.fields[3].typeDescriptor.fullName)
   test.done()
 })
 

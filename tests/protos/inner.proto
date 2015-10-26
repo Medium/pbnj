@@ -1,0 +1,21 @@
+package burrito;
+
+message Tortilla {
+  enum Filling {
+    CHICKEN = 1;
+    BEEF = 2;
+    TOFU = 3;
+  }
+
+  message Guac {
+    repeated Avocado avacados = 1;
+  }
+
+  optional Filling filling1 = 2;
+  optional burrito.Tortilla.Filling filling2 = 3;
+  optional Guac guac1 = 4;
+  optional burrito.Tortilla.Guac guac2 = 5;
+}
+
+message Avocado {
+}
