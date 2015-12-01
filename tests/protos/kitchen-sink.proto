@@ -24,6 +24,12 @@ message ThisIsTheKitchenSink {
   optional int32 negative_field = 6 [default=-1];
   optional string string_field = 7 [default='string'];
   optional examples.Color color_field = 8;
+
+  oneof oneof_name {
+    int32 oneof_field_normal = 9;
+    string oneof_field_with_option = 10 [default='string'];
+    examples.Color oneof_color_field = 11;
+  }
 }
 
 
