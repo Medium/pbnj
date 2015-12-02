@@ -40,7 +40,7 @@ exports.testKitchenSinkParsing = function (test) {
 
   // Test fields.
   var msg = proto.getMessage('ThisIsTheKitchenSink')
-  test.equal(msg.getFields().length, 7)
+  test.equal(msg.getFields().length, 10)
   test.ok(msg.getField('optional_field').isOptional())
   test.ok(!msg.getField('required_field').isOptional())
   test.ok(!msg.getField('required_field').isRepeated())
@@ -56,6 +56,15 @@ exports.testKitchenSinkParsing = function (test) {
   test.equal(msg.getField('color_field').getBaseType(), 'Color')
   test.equal(-1, msg.getField('negative_field').getOption('default'))
   test.equal('string', msg.getField('string_field').getOption('default'))
+
+  test.equal(msg.getOneof('oneof_name').getOneofIndex(), 0)
+  test.ok(msg.getField('oneof_field_normal').isOptional())
+  test.ok(msg.getField('oneof_field_with_option').isOptional())
+  test.ok(msg.getField('oneof_color_field').isOptional())
+  test.equal(msg.getField('oneof_field_normal').getType(), 'number')
+  test.equal(msg.getField('oneof_field_with_option').getOption('default'), 'string')
+  test.equal(msg.getField('oneof_color_field').getType(), 'examples.Color')
+  test.equal(msg.getField('oneof_color_field').getBaseType(), 'Color')
 
   test.done()
 }

@@ -124,7 +124,6 @@ builder.add(function testRemoveField(test) {
       .addProto('protos/common.proto')
 
   var color = project.getProtos('protos/common.proto')[0].getMessage('Color')
-  console.log('COLOR', color.toTemplateObject)
   test.equal(3, color.toTemplateObject().fields.length)
 
   color.removeFieldByName('red')
