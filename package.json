@@ -3,10 +3,10 @@
   "version": "0.6.0",
   "keywords": ["protocol", "buffer", "proto", "protobuf", "parser", "codegen"],
   "description": "JavaScript protocol buffer schema parser and template based code generator",
-  "homepage": "https://github.com/dpup/pbnj",
+  "homepage": "https://github.com/Medium/pbnj",
   "repository": {
     "type": "git",
-    "url": "git://github.com/dpup/pbnj.git"
+    "url": "git://github.com/Medium/pbnj.git"
   },
   "license": "Apache-2.0",
   "author": {
