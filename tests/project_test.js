@@ -131,6 +131,18 @@ builder.add(function testRemoveField(test) {
   test.done()
 })
 
+builder.add(function testAddSyntheticField(test) {
+  var project = new Project(baseDir)
+      .addProto('protos/common.proto')
+
+  var color = project.getProtos('protos/common.proto')[0].getMessage('Color')
+  test.equal(3, color.toTemplateObject().fields.length)
+
+  color.addSyntheticField('int32', 'alpha', 4)
+  test.equal(4, color.toTemplateObject().fields.length)
+  test.done()
+})
+
 builder.add(function testTypeResolution(test) {
   var project = new Project(baseDir)
       .addProto('protos/person.proto')
