@@ -1,6 +1,6 @@
 {
   "name": "pbnj",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "keywords": ["protocol", "buffer", "proto", "protobuf", "parser", "codegen"],
   "description": "JavaScript protocol buffer schema parser and template based code generator",
   "homepage": "https://github.com/Medium/pbnj",
