@@ -30,6 +30,9 @@ message ThisIsTheKitchenSink {
     string oneof_field_with_option = 10 [default='string'];
     examples.Color oneof_color_field = 11;
   }
+
+  optional bool sherlock_lives_at_221b = 12;
+  optional bool call_867_5309 = 13;
 }
 
 
