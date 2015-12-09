@@ -44,6 +44,21 @@ exports.testCasingMessage = function (test) {
   test.done()
 }
 
+exports.textCasingNumbers = function (test) {
+  var proto = parseFile('kitchen-sink.proto')
+  var msg = proto.getMessage('ThisIsTheKitchenSink')
+
+  test.ok(msg.getField('sherlock_lives_at_221b'))
+  test.equal('sherlock_lives_at_221b', msg.getField('sherlock_lives_at_221b').toTemplateObject().name)
+  test.equal('SherlockLivesAt221b', msg.getField('sherlock_lives_at_221b').toTemplateObject().titleName)
+
+  test.ok(msg.getField('call_867_5309'))
+  test.equal('call_867_5309', msg.getField('call_867_5309').toTemplateObject().name)
+  test.equal('Call8675309', msg.getField('call_867_5309').toTemplateObject().titleName)
+
+  test.done()
+}
+
 exports.testCasingEnum = function (test) {
   var proto = parseFile('conventions.proto')
 

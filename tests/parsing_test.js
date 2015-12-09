@@ -40,7 +40,7 @@ exports.testKitchenSinkParsing = function (test) {
 
   // Test fields.
   var msg = proto.getMessage('ThisIsTheKitchenSink')
-  test.equal(msg.getFields().length, 10)
+  test.equal(msg.getFields().length, 12)
   test.ok(msg.getField('optional_field').isOptional())
   test.ok(!msg.getField('required_field').isOptional())
   test.ok(!msg.getField('required_field').isRepeated())
@@ -65,6 +65,9 @@ exports.testKitchenSinkParsing = function (test) {
   test.equal(msg.getField('oneof_field_with_option').getOption('default'), 'string')
   test.equal(msg.getField('oneof_color_field').getType(), 'examples.Color')
   test.equal(msg.getField('oneof_color_field').getBaseType(), 'Color')
+
+  test.equal(msg.getField('sherlock_lives_at_221b').getType(), 'boolean')
+  test.equal(msg.getField('call_867_5309').getType(), 'boolean')
 
   test.done()
 }
