@@ -21,14 +21,17 @@ exports.testCasingMessage = function (test) {
   test.ok(msg.getField('normal_case'))
   test.equal('normal_case', msg.getField('normal_case').toTemplateObject().name)
   test.equal('NormalCase', msg.getField('normal_case').toTemplateObject().titleName)
+  test.equal('NORMAL_CASE', msg.getField('normal_case').toTemplateObject().upperUnderscoreName)
 
   test.ok(msg.getField('normal_case_ios'))
   test.equal('normal_case_ios', msg.getField('normal_case_ios').toTemplateObject().name)
   test.equal('NormalCaseIos', msg.getField('normal_case_ios').toTemplateObject().titleName)
+  test.equal('NORMAL_CASE_IOS', msg.getField('normal_case_ios').toTemplateObject().upperUnderscoreName)
 
   test.ok(msg.getField('camelCase'))
   test.equal('camelCase', msg.getField('camelCase').toTemplateObject().name)
   test.equal('CamelCase', msg.getField('camelCase').toTemplateObject().titleName)
+  test.equal('CAMEL_CASE', msg.getField('camelCase').toTemplateObject().upperUnderscoreName)
 
   test.ok(msg.getField('camelCaseIOS'))
   test.equal('camelCaseIOS', msg.getField('camelCaseIOS').toTemplateObject().name)
