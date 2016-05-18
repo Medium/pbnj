@@ -1,0 +1,17 @@
+
+package shoes;
+
+message Shoe {
+  optional string shoeId = 1;
+}
+
+message FullShoe {
+  optional string shoeId = 1;
+  optional bool isLaced = 2;
+  optional int32 strideCount = 3;
+}
+
+service RunningShoe {
+  rpc Lace (Shoe) returns (FullShoe);
+  rpc Stride (Shoe) returns (FullShoe);
+}
