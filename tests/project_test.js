@@ -166,6 +166,26 @@ builder.add(function testTypeResolutionInner(test) {
   test.done()
 })
 
+builder.add(function testServiceTypeResolution(test) {
+  var project = new Project(baseDir)
+    .addProto('protos/services.proto')
+
+  var shoes = project.getProtos('protos/services.proto')[0].toTemplateObject()
+
+  var running = shoes.services[0]
+  test.equal('shoes.RunningShoe', running.fullName)
+  test.equal('Lace', running.methods[0].name)
+  test.equal('lace', running.methods[0].camelName)
+  var laceMethod = running.methods[0]
+  test.equal('shoes.Shoe', laceMethod.inputTypeDescriptor.fullName)
+  test.equal('shoes.FullShoe', laceMethod.outputTypeDescriptor.fullName)
+  test.equal('shoeId', laceMethod.inputTypeDescriptor.fields[0].camelName)
+  test.equal('shoeId', laceMethod.outputTypeDescriptor.fields[0].camelName)
+  test.equal('isLaced', laceMethod.outputTypeDescriptor.fields[1].camelName)
+  test.equal('strideCount', laceMethod.outputTypeDescriptor.fields[2].camelName)
+  test.done()
+})
+
 builder.add(function testTypeResolutionLoop(test) {
   var project = new Project(baseDir)
       .addProto('protos/loop.proto')

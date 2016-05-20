@@ -69,6 +69,19 @@ exports.testKitchenSinkParsing = function (test) {
   test.equal(msg.getField('sherlock_lives_at_221b').getType(), 'boolean')
   test.equal(msg.getField('call_867_5309').getType(), 'boolean')
 
+  // Test service parsing
+  test.equal(proto.getServices().length, 1)
+  var service = proto.getService("WhatTheSinkCanDo")
+  test.equal(service.getMethods().length, 3)
+  test.equal(service.getMethods()[0].getName(), "DisposeLoudly")
+  test.equal(service.getMethods()[0].getRawInputType(), "ThisIsTheKitchenSink")
+  test.equal(service.getMethods()[0].getRawOutputType(), "examples.Color")
+  test.equal(service.getMethods()[0].getBaseOutputType(), "Color")
+  test.equal(service.getMethods()[1].getName(), "RinseQuietly")
+  test.equal(service.getMethods()[2].getName(), "HoldDishes")
+  test.equal(service.getMethods()[0].getOption('method_option'), 'gargle')
+  test.equal(service.getMethods()[1].getOption('method_option'), 'shhhhh')
+  test.ok(!service.getMethods()[2].getOption('method_option'))
   test.done()
 }
 

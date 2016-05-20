@@ -52,6 +52,18 @@ message AnotherMessage {
 }
 
 
+service WhatTheSinkCanDo {
+  rpc DisposeLoudly (ThisIsTheKitchenSink) returns (examples.Color) {
+    option (method_option) = "gargle";
+  }
+
+  rpc RinseQuietly (ThisIsTheKitchenSink) returns (examples.Color) {
+    option (method_option) = "shhhhh";
+  }
+
+  rpc HoldDishes (ThisIsTheKitchenSink) returns (examples.Color);
+}
+
 extend google.protobuf.MessageOptions {
   optional string message_type = 50004;
 }
