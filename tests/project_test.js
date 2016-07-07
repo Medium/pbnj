@@ -61,7 +61,7 @@ builder.add(function testBasicCompilation(test) {
 
       test.equals('Proto=vehicle.proto,Msg=Vehicle,', compilations[0].contents)
 
-      test.equals(path.join(__dirname, 'generated-stuff', 'vehicle.proto.xx.js'), compilations[0].fileName)
+      test.equals(path.join(__dirname, 'generated-stuff/protos', 'vehicle.proto.xx.js'), compilations[0].fileName)
     })
 })
 
@@ -87,14 +87,14 @@ builder.add(function testSuffixSpecificOutputDir(test) {
       test.equals('Proto=vehicle.proto,Msg=Vehicle,', compilations[0].contents)
       test.equals('Proto=vehicle.proto,Msg=Vehicle,', compilations[1].contents)
 
-      test.equals(path.join(__dirname, 'java/generated-stuff', 'VehicleProtos.java'), compilations[0].fileName)
-      test.equals(path.join(__dirname, 'generated-stuff', 'vehicle.proto.xx.js'), compilations[1].fileName)
+      test.equals(path.join(__dirname, 'java/generated-stuff/protos', 'VehicleProtos.java'), compilations[0].fileName)
+      test.equals(path.join(__dirname, 'generated-stuff/protos', 'vehicle.proto.xx.js'), compilations[1].fileName)
     })
 })
 
 
 builder.add(function testDefaultOutputFnWritesFile(test) {
-  var expectedFile = path.join(__dirname, 'generated-stuff2', 'common.proto.js')
+  var expectedFile = path.join(__dirname, 'generated-stuff2/protos', 'common.proto.js')
 
   // Make sure the expected file doesn't exist yet.
   if (fs.existsSync(expectedFile)) fs.unlinkSync(expectedFile)
