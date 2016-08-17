@@ -12,6 +12,6 @@ message FullShoe {
 }
 
 service RunningShoe {
-  rpc Lace (Shoe) returns (FullShoe);
+  rpc LaceShoe (Shoe) returns (FullShoe);
   rpc Stride (Shoe) returns (FullShoe);
 }

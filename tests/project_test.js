@@ -174,8 +174,9 @@ builder.add(function testServiceTypeResolution(test) {
 
   var running = shoes.services[0]
   test.equal('shoes.RunningShoe', running.fullName)
-  test.equal('Lace', running.methods[0].name)
-  test.equal('lace', running.methods[0].camelName)
+  test.equal('LaceShoe', running.methods[0].name)
+  test.equal('laceShoe', running.methods[0].camelName)
+  test.equal('LACE_SHOE', running.methods[0].upperUnderscoreName)
   var laceMethod = running.methods[0]
   test.equal('shoes.Shoe', laceMethod.inputTypeDescriptor.fullName)
   test.equal('shoes.FullShoe', laceMethod.outputTypeDescriptor.fullName)
