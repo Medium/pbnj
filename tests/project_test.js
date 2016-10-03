@@ -194,7 +194,7 @@ builder.add(function testTypeResolutionLoop(test) {
   var dee = project.getProtos('protos/loop.proto')[0].getMessage('TweedleDee')
   var dum = dee.getField('dum')
   test.equal('TweedleDum', dum.toTemplateObject().typeDescriptor.name)
-  test.equal(null, dum.toTemplateObject().typeDescriptor.fields)
+  test.equal(1, dum.toTemplateObject().typeDescriptor.fields.length)
   test.done()
 })
 
