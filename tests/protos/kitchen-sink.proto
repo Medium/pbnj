@@ -53,6 +53,8 @@ message AnotherMessage {
 
 
 service WhatTheSinkCanDo {
+  option (service_level_option) = "serviceOption";
+
   rpc DisposeLoudly (ThisIsTheKitchenSink) returns (examples.Color) {
     option (method_option) = "gargle";
   }

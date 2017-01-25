@@ -19,3 +19,7 @@ extend google.protobuf.FileOptions {
 extend google.protobuf.MethodOptions {
   optional string method_option = 20160518;
 }
+
+extend google.protobuf.ServiceOptions {
+  optional string service_level_option = 20170125;
+}
