@@ -1,7 +1,14 @@
 {
   "name": "pbnj",
-  "version": "0.12.0",
-  "keywords": ["protocol", "buffer", "proto", "protobuf", "parser", "codegen"],
+  "version": "0.12.1",
+  "keywords": [
+    "protocol",
+    "buffer",
+    "proto",
+    "protobuf",
+    "parser",
+    "codegen"
+  ],
   "description": "JavaScript protocol buffer schema parser and template based code generator",
   "homepage": "https://github.com/Medium/pbnj",
   "repository": {
@@ -14,11 +21,13 @@
     "email": "dan@pupi.us",
     "url": "http://pupius.co.uk"
   },
-  "maintainers": [ {
-    "name": "Dan Pupius",
-    "email": "dan@pupi.us",
-    "web": "http://pupius.co.uk/"
-  } ],
+  "maintainers": [
+    {
+      "name": "Dan Pupius",
+      "email": "dan@pupi.us",
+      "web": "http://pupius.co.uk/"
+    }
+  ],
   "main": "lib/pbnj.js",
   "scripts": {
     "test": "nodeunit ./tests/ && tests/protoc_test.sh && eslint lib"
