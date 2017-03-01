@@ -114,7 +114,7 @@ builder.add(function testKitchenSinkProto(test) {
       .addProto('protos/kitchen-sink.proto')
 
   var allProtos = project.getProtos().map(getProtoName)
-  test.deepEqual(['kitchen-sink.proto', 'options.proto', 'descriptor.proto', 'common.proto'], allProtos)
+  test.deepEqual(['kitchen-sink.proto', 'options.proto', 'descriptor.proto', 'otherOptions.proto', 'common.proto'], allProtos)
 
   return project.setOutDir('generated-stuff3').compile()
 })
