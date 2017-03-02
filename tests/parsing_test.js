@@ -56,7 +56,7 @@ exports.testKitchenSinkParsing = function (test) {
   test.equal(msg.getField('color_field').getBaseType(), 'Color')
   test.equal(-1, msg.getField('negative_field').getOption('default'))
   test.equal('string', msg.getField('string_field').getOption('default'))
-  test.equal(msg.getField('other_field_option').getOption('name'), 'special')
+  test.equal(msg.getField('other_field_option').getOption('other.field.field_name'), 'special')
 
   test.equal(msg.getOneof('oneof_name').getOneofIndex(), 0)
   test.ok(msg.getField('oneof_field_normal').isOptional())

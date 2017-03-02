@@ -34,7 +34,7 @@ message ThisIsTheKitchenSink {
 
   optional bool sherlock_lives_at_221b = 12;
   optional bool call_867_5309 = 13;
-  optional string other_field_option = 14 [(other.field).name="special"];
+  optional string other_field_option = 14 [(other.field).field_name='special'];
 }
 
 

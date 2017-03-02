@@ -3,7 +3,7 @@ package other;
 import "google/protobuf/descriptor.proto";
 
 message FieldOptions {
-  optional string name = 1;
+  optional string field_name = 1;
 }
 
 extend google.protobuf.FieldOptions {
