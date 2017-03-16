@@ -4,6 +4,8 @@
  * Both comment types should be supported and ignore other tokens such as message FooBar { }.
  */
 
+syntax = "proto2";
+
 package some_package;
 
 import "protos/options.proto";
