@@ -1,4 +1,5 @@
 // Copyright 2015. A Medium Corporation.
+syntax = "proto2";
 
 import "google/protobuf/descriptor.proto";
 

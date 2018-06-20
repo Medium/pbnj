@@ -2,6 +2,8 @@
  * Extension of person
  */
 
+syntax = "proto2";
+
 import "protos/person.proto";
 
 package examples;
