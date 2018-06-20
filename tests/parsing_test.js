@@ -74,19 +74,99 @@ exports.testKitchenSinkParsing = function (test) {
 
   // Test service parsing
   test.equal(proto.getServices().length, 1)
-  var service = proto.getService("WhatTheSinkCanDo")
+  var service = proto.getService('WhatTheSinkCanDo')
   test.equal(service.getMethods().length, 3)
-  test.equal(service.getMethods()[0].getName(), "DisposeLoudly")
-  test.equal(service.getMethods()[0].getRawInputType(), "ThisIsTheKitchenSink")
-  test.equal(service.getMethods()[0].getRawOutputType(), "examples.Color")
-  test.equal(service.getMethods()[0].getBaseOutputType(), "Color")
-  test.equal(service.getMethods()[1].getName(), "RinseQuietly")
-  test.equal(service.getMethods()[2].getName(), "HoldDishes")
+  test.equal(service.getMethods()[0].getName(), 'DisposeLoudly')
+  test.equal(service.getMethods()[0].getRawInputType(), 'ThisIsTheKitchenSink')
+  test.equal(service.getMethods()[0].getRawOutputType(), 'examples.Color')
+  test.equal(service.getMethods()[0].getBaseOutputType(), 'Color')
+  test.equal(service.getMethods()[1].getName(), 'RinseQuietly')
+  test.equal(service.getMethods()[2].getName(), 'HoldDishes')
   test.equal(service.getMethods()[0].getOption('method_option'), 'gargle')
   test.equal(service.getMethods()[1].getOption('method_option'), 'shhhhh')
   test.ok(!service.getMethods()[2].getOption('method_option'))
   test.equal(service.getOption('service_level_option'), 'serviceOption')
   test.done()
+}
+
+
+exports.testKitchenSinkParsingV3 = function (test) {
+  var proto = parseFile('kitchen-sink-v3.proto')
+
+  test.equal(proto.getPackage(), 'some_newer_package')
+
+  test.equal(proto.getSyntax(), 'proto3')
+
+  // Test imports.
+  test.equal(proto.getImportNames().length, 4)
+  test.equal(proto.getImportNames()[0], 'protos/options.proto')
+
+  // Test proto level options.
+  test.equal(proto.getOptionKeys().length, 2)
+  test.equal(proto.getOption('file_level_option'), 'string value')
+  test.equal(proto.getOption('another_option'), 'Just "testing" that strings parse.')
+
+  // Test message level options.
+  test.equals(proto.getMessage('SomeCoolMessage').getOption('message_level_option'), 'XYZ')
+
+  // Test messages.
+  test.equal(proto.getMessages().length, 2)
+  test.ok(!!proto.getMessage('SomeCoolMessage').getMessage('MessagesWithinMessages'))
+  test.ok(!!proto.getMessage('SomeCoolMessage')
+      .getMessage('MessagesWithinMessages')
+      .getEnum('EnumInsideMessageInsideMessage'))
+
+  // Test fields.
+  var msg = proto.getMessage('ThisIsTheKitchenSinkV3')
+  test.equal(msg.getFields().length, 12)
+  test.ok(msg.getField('some_field').isOptional())
+  test.ok(!msg.getField('some_field').isRepeated())
+  test.ok(!msg.getField('repeated_field').isOptional())
+  test.ok(msg.getField('repeated_field').isRepeated())
+
+  test.equal(msg.getField('some_field').getType(), 'string')
+  test.equal(msg.getField('number_field').getType(), 'number')
+  test.equal(msg.getField('repeated_field').getType(), 'boolean')
+  test.equal(msg.getField('using_another_message').getType(), 'SomeCoolMessage')
+  test.equal(msg.getField('color_field').getType(), 'examples.Color')
+  test.equal(msg.getField('color_field').getBaseType(), 'Color')
+  test.equal(msg.getField('other_field_option').getOption('other.field.field_name'), 'special')
+
+  test.equal(msg.getOneof('oneof_name').getOneofIndex(), 0)
+  test.ok(msg.getField('oneof_field_normal').isOptional())
+  test.ok(msg.getField('oneof_field_with_option').isOptional())
+  test.ok(msg.getField('oneof_color_field').isOptional())
+  test.equal(msg.getField('oneof_field_normal').getType(), 'number')
+  test.equal(msg.getField('oneof_field_with_option').getOption('other.field.field_name'), 'specialty')
+  test.equal(msg.getField('oneof_color_field').getType(), 'examples.Color')
+  test.equal(msg.getField('oneof_color_field').getBaseType(), 'Color')
+
+  test.equal(msg.getField('sherlock_lives_at_221b').getType(), 'boolean')
+  test.equal(msg.getField('call_867_5309').getType(), 'boolean')
+
+  // Test service parsing
+  test.equal(proto.getServices().length, 1)
+  var service = proto.getService('WhatTheSinkV3CanDo')
+  test.equal(service.getMethods().length, 3)
+  test.equal(service.getMethods()[0].getName(), 'DisposeLoudly')
+  test.equal(service.getMethods()[0].getRawInputType(), 'ThisIsTheKitchenSinkV3')
+  test.equal(service.getMethods()[0].getRawOutputType(), 'examples.Color')
+  test.equal(service.getMethods()[0].getBaseOutputType(), 'Color')
+  test.equal(service.getMethods()[1].getName(), 'RinseQuietly')
+  test.equal(service.getMethods()[2].getName(), 'HoldDishes')
+  test.equal(service.getMethods()[0].getOption('method_option'), 'gargle')
+  test.equal(service.getMethods()[1].getOption('method_option'), 'shhhhh')
+  test.ok(!service.getMethods()[2].getOption('method_option'))
+  test.equal(service.getOption('service_level_option'), 'serviceOption')
+
+  test.done()
+}
+
+
+exports.testBadProto_incorrectSyntax = function (test) {
+  assertFails('syntax = "proto2"; message SyntaxThree { string first = 1; string second = 1; }',
+      'Unexpected token in',
+      'Protos using incorrect syntax according to version should fail', test)
 }
 
 

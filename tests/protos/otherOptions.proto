@@ -1,3 +1,5 @@
+syntax = "proto2";
+
 package other;
 
 import "google/protobuf/descriptor.proto";

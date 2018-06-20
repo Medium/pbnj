@@ -1,3 +1,4 @@
+syntax = "proto2";
 
 message TweedleDee {
   optional TweedleDum dum = 1;

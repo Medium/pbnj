@@ -1,0 +1,78 @@
+// Proto file that tries to exercise all valid proto features.
+
+/**
+ * Both comment types should be supported and ignore other tokens such as message FooBar { }.
+ */
+
+syntax = "proto3";
+
+package some_newer_package;
+
+import "protos/options.proto";
+import "protos/otherOptions.proto";
+import "protos/common.proto";
+import "google/protobuf/descriptor.proto";
+
+option (file_level_option) = "string value";
+option (another_option) = "Just \"testing\" that strings parse.";
+
+message ThisIsTheKitchenSinkV3 {
+  string some_field = 1;
+  repeated bool repeated_field = 2;
+  SomeCoolMessage using_another_message = 3;
+
+  int32 number_field = 4;
+  string string_field = 5;
+  examples.Color color_field = 6;
+
+  oneof oneof_name {
+    int32 oneof_field_normal = 7;
+    string oneof_field_with_option = 8 [(other.field).field_name='specialty'];
+    examples.Color oneof_color_field = 9;
+  }
+
+  bool sherlock_lives_at_221b = 10;
+  bool call_867_5309 = 11;
+  string other_field_option = 12 [(other.field).field_name='special'];
+}
+
+message SomeCoolMessage {
+  option (message_level_option) = "XYZ";
+  int64 id = 1000 [(option)=1, (something_else)="foobar"];
+  string x = 1; string y = 2; string z = 3;
+
+  message MessagesWithinMessages {
+    bool done = 1;
+
+    enum EnumInsideMessageInsideMessage {
+      V3_MAYBE = 0;
+      V3_YES = 1;
+      V3_NO = 2;
+    }
+  }
+}
+
+service WhatTheSinkV3CanDo {
+  option (service_level_option) = "serviceOption";
+
+  rpc DisposeLoudly (ThisIsTheKitchenSinkV3) returns (examples.Color) {
+    option (method_option) = "gargle";
+  }
+
+  rpc RinseQuietly (ThisIsTheKitchenSinkV3) returns (examples.Color) {
+    option (method_option) = "shhhhh";
+  }
+
+  rpc HoldDishes (ThisIsTheKitchenSinkV3) returns (examples.Color);
+}
+
+extend google.protobuf.MessageOptions {
+  string another_message_type = 50005;
+}
+
+enum ColorsInWheel {
+  COLOR_UNKNOWN = 0;
+  COLOR_BLACK = 1;
+  COLOR_RED = 2;
+  COLOR_BLUE = 3;
+}

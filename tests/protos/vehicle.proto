@@ -1,5 +1,7 @@
 // Proto definition for a Car
 
+syntax = "proto2";
+
 import "protos/common.proto";
 import "protos/person.proto";
 

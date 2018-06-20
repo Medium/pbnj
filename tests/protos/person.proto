@@ -2,6 +2,8 @@
  * Proto definition for a Person
  */
 
+syntax = "proto2";
+
 import "protos/common.proto";
 
 package examples;

@@ -1,3 +1,5 @@
+syntax = "proto2";
+
 package burrito;
 
 message Tortilla {
@@ -19,4 +21,3 @@ message Tortilla {
 
 message Avocado {
 }
-
