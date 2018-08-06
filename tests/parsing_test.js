@@ -26,9 +26,11 @@ exports.testKitchenSinkParsing = function (test) {
   test.equal(proto.getImportNames()[0], 'protos/options.proto')
 
   // Test proto level options.
-  test.equal(proto.getOptionKeys().length, 2)
+  test.equal(proto.getOptionKeys().length, 4)
   test.equal(proto.getOption('file_level_option'), 'string value')
   test.equal(proto.getOption('another_option'), 'Just "testing" that strings parse.')
+  test.equal(proto.getOption('options.package_name'), 'some.options')
+  test.equal(proto.getOption('options.flat_package'), 'true')
 
   // Test message level options.
   test.equals(proto.getMessage('AnotherMessage').getOption('message_level_option'), 'XYZ')

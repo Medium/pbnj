@@ -15,7 +15,10 @@ import "google/protobuf/descriptor.proto";
 
 option (file_level_option) = "string value";
 option (another_option) = "Just \"testing\" that strings parse.";
-
+option (options) = {
+  package_name: "some.options"
+  flat_package: true
+};
 
 message ThisIsTheKitchenSink {
   required string required_field = 1;
