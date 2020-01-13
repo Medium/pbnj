@@ -64,6 +64,7 @@ service WhatTheSinkCanDo {
 
   rpc DisposeLoudly (ThisIsTheKitchenSink) returns (examples.Color) {
     option (method_option) = "gargle";
+    option (number_method_option) = 60;
   }
 
   rpc RinseQuietly (ThisIsTheKitchenSink) returns (examples.Color) {
