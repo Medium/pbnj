@@ -19,6 +19,7 @@ extend google.protobuf.FileOptions {
 
 extend google.protobuf.MethodOptions {
   optional string method_option = 20160518;
+  optional int32 number_method_option = 20160519;
 }
 
 extend google.protobuf.ServiceOptions {

@@ -85,6 +85,7 @@ exports.testKitchenSinkParsing = function (test) {
   test.equal(service.getMethods()[1].getName(), 'RinseQuietly')
   test.equal(service.getMethods()[2].getName(), 'HoldDishes')
   test.equal(service.getMethods()[0].getOption('method_option'), 'gargle')
+  test.equal(service.getMethods()[0].getOption('number_method_option'), 60)
   test.equal(service.getMethods()[1].getOption('method_option'), 'shhhhh')
   test.ok(!service.getMethods()[2].getOption('method_option'))
   test.equal(service.getOption('service_level_option'), 'serviceOption')
