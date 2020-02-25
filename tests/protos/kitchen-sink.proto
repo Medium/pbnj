@@ -20,6 +20,16 @@ option (options) = {
   flat_package: true
 };
 
+option (repeated_message_options) = {
+  package_name: "one_option"
+  flat_package: true
+};
+
+option (repeated_message_options) = {
+  package_name: "another"
+  flat_package: false
+};
+
 message ThisIsTheKitchenSink {
   required string required_field = 1;
   optional int32 optional_field = 2;
