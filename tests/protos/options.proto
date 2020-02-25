@@ -3,6 +3,11 @@ syntax = "proto2";
 
 import "google/protobuf/descriptor.proto";
 
+message SomeFileOptionMessage {
+  optional string package_name = 1;
+  optional bool flat_package = 2;
+}
+
 extend google.protobuf.FieldOptions {
   optional int32 option = 20150103;
   optional string something_else = 20150104;
@@ -15,6 +20,7 @@ extend google.protobuf.MessageOptions {
 extend google.protobuf.FileOptions {
   optional string file_level_option = 20150101;
   optional string another_option = 20150105;
+  optional SomeFileOptionMessage options = 20150106;
 }
 
 extend google.protobuf.MethodOptions {
