@@ -30,6 +30,16 @@ option (repeated_message_options) = {
   flat_package: false
 };
 
+option (surrogate_a) = {
+  base_uri: "/some/:uri"
+  mapped: ["url"]
+};
+
+option (surrogate_b) = {
+  base_uri: "/some/:uri/:model"
+  mapped: ["url", "entity"]
+};
+
 message ThisIsTheKitchenSink {
   required string required_field = 1;
   optional int32 optional_field = 2;

@@ -8,6 +8,11 @@ message SomeFileOptionMessage {
   optional bool flat_package = 2;
 }
 
+message AnotherFileOptionMessage {
+  optional string base_uri = 1;
+  repeated string mapped = 2;
+}
+
 extend google.protobuf.FieldOptions {
   optional int32 option = 20150103;
   optional string something_else = 20150104;
@@ -22,6 +27,8 @@ extend google.protobuf.FileOptions {
   optional string another_option = 20150105;
   optional SomeFileOptionMessage options = 20150106;
   repeated SomeFileOptionMessage repeated_message_options = 20150107;
+  optional AnotherFileOptionMessage surrogate_a = 20150108;
+  optional AnotherFileOptionMessage surrogate_b = 20150109;
 }
 
 extend google.protobuf.MethodOptions {

@@ -26,7 +26,7 @@ exports.testKitchenSinkParsing = function (test) {
   test.equal(proto.getImportNames()[0], 'protos/options.proto')
 
   // Test proto level options.
-  test.equal(proto.getOptionKeys().length, 4)
+  test.equal(proto.getOptionKeys().length, 6)
   test.equal(proto.getOption('file_level_option'), 'string value')
   test.equal(proto.getOption('another_option'), 'Just "testing" that strings parse.')
   test.equal(proto.getOption('options')['package_name'], 'some.options')
@@ -36,6 +36,13 @@ exports.testKitchenSinkParsing = function (test) {
   test.equal(proto.getOption('repeated_message_options')[0]['flat_package'], 'true')
   test.equal(proto.getOption('repeated_message_options')[1]['package_name'], 'another')
   test.equal(proto.getOption('repeated_message_options')[1]['flat_package'], 'false')
+  test.equal(proto.getOption('surrogate_a')['base_uri'], '/some/:uri')
+  test.equal(proto.getOption('surrogate_a')['mapped'].length, 1)
+  test.equal(proto.getOption('surrogate_a')['mapped'][0], 'url')
+  test.equal(proto.getOption('surrogate_b')['base_uri'], '/some/:uri/:model')
+  test.equal(proto.getOption('surrogate_b')['mapped'].length, 2)
+  test.equal(proto.getOption('surrogate_b')['mapped'][0], 'url')
+  test.equal(proto.getOption('surrogate_b')['mapped'][1], 'entity')
 
   // Test message level options.
   test.equals(proto.getMessage('AnotherMessage').getOption('message_level_option'), 'XYZ')
