@@ -29,6 +29,7 @@ extend google.protobuf.FileOptions {
   repeated SomeFileOptionMessage repeated_message_options = 20150107;
   optional AnotherFileOptionMessage surrogate_a = 20150108;
   optional AnotherFileOptionMessage surrogate_b = 20150109;
+  repeated string repeated_string_option = 20150110;
 }
 
 extend google.protobuf.MethodOptions {
