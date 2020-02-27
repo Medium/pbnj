@@ -40,6 +40,9 @@ option (surrogate_b) = {
   mapped: ["url", "entity"]
 };
 
+option (repeated_string_option) = "hello";
+option (repeated_string_option) = "world";
+
 message ThisIsTheKitchenSink {
   required string required_field = 1;
   optional int32 optional_field = 2;
