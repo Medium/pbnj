@@ -1,6 +1,6 @@
 {
   "name": "pbnj",
-  "version": "0.14.7",
+  "version": "1.0.0",
   "keywords": [
     "protocol",
     "buffer",
@@ -34,7 +34,7 @@
   },
   "dependencies": {
     "mkdirp": "0.3.5",
-    "kew": "0.7.0",
+    "kew": "git+https://github.com/Medium/kew#8ff855d9cca99c287514b51e793b202a51758191",
     "soynode": "^1.1.0"
   },
   "devDependencies": {
