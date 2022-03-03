@@ -34,7 +34,7 @@
   },
   "dependencies": {
     "mkdirp": "0.3.5",
-    "kew": "git+https://github.com/Medium/kew#7caa1be",
+    "kew": "git+https://github.com/Medium/kew#b8aaf9f",
     "soynode": "^1.1.0"
   },
   "devDependencies": {
