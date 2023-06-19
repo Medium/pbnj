@@ -34,6 +34,11 @@ message ThisIsTheKitchenSinkV3 {
   bool sherlock_lives_at_221b = 10;
   bool call_867_5309 = 11;
   string other_field_option = 12 [(other.field).field_name='special'];
+
+  reserved 20230619100;
+  reserved 20230619200, 20230619300 to 20230619400;
+  reserved "this_is_reserved";
+  reserved "this_too_is_reserved", "this_also_is_reserved";
 }
 
 message SomeCoolMessage {
